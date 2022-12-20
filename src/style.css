@@ -9,11 +9,22 @@ html {
 body {
   font-family: "Montserrat", sans-serif;
   color: black;
-  background-color: #d9d3c8;
   margin: 0;
+  height: 80vh;
+}
+.welcome-container{
+  display:grid;
+  height: 100%;
+  place-items: center;
+  text-align: center;
+}
+.welcome-img-container{
+  max-width: 25%;
+  margin: auto;
 }
 main {
   max-width: 1320px;
+  height: 100%;
   margin: auto;
 }
 body p {
@@ -27,7 +38,6 @@ img {
 }
 nav {
   z-index: 10;
-  background-color: #d9d3c8;
   position: sticky;
   top: 0;
   display: flex;
@@ -58,9 +68,6 @@ nav ul li:hover {
 nav a {
   color: inherit;
   text-decoration: inherit;
-}
-main {
-  min-height: 100vh;
 }
 .hero {
   display: flex;
@@ -160,4 +167,12 @@ button:hover {
 }
 footer {
   background-color: var(--text_gray);
+}
+@media (width <= 500px) {
+  nav{
+    display: none;
+  }
+  .welcome-img-container{
+    max-width: 50%;
+  }
 }
