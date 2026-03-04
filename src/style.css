@@ -1,6 +1,6 @@
 /* ===== Variables — auto-generated palette (system light/dark) ===== */
 :root {
-  /* Light theme (default and when system prefers light) */
+  /* Light theme (default and when system prefers light) — WCAG AA contrast for text and buttons */
   --bg-primary: #ffffff;
   --bg-secondary: #f7f9fc;
   --bg-tertiary: #eef2f7;
@@ -8,14 +8,14 @@
   --surface-secondary: #f1f5f9;
   --text-primary: #0f172a;
   --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-muted: #64748b;
   --border-primary: #e2e8f0;
   --border-secondary: #cbd5e1;
-  --accent-primary: #16a34a;
-  --accent-primary-hover: #15803d;
+  --accent-primary: #15803d;
+  --accent-primary-hover: #166534;
   --accent-primary-soft: #dcfce7;
   --btn-primary-text: #ffffff;
-  --btn-outline-border: #16a34a;
+  --btn-outline-border: #15803d;
   --link-color: #15803d;
   --link-hover: #166534;
   --font-sans: "DM Sans", "Outfit", system-ui, sans-serif;
@@ -41,7 +41,7 @@
     --surface-primary: #111827;
     --surface-secondary: #1f2937;
     --text-primary: #f8fafc;
-    --text-secondary: #cbd5f5;
+    --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
     --border-primary: #334155;
     --border-secondary: #475569;
@@ -64,14 +64,14 @@ html[data-theme="light"] {
   --surface-secondary: #f1f5f9;
   --text-primary: #0f172a;
   --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-muted: #64748b;
   --border-primary: #e2e8f0;
   --border-secondary: #cbd5e1;
-  --accent-primary: #16a34a;
-  --accent-primary-hover: #15803d;
+  --accent-primary: #15803d;
+  --accent-primary-hover: #166534;
   --accent-primary-soft: #dcfce7;
   --btn-primary-text: #ffffff;
-  --btn-outline-border: #16a34a;
+  --btn-outline-border: #15803d;
   --link-color: #15803d;
   --link-hover: #166534;
 }
@@ -84,7 +84,7 @@ html[data-theme="dark"] {
   --surface-primary: #111827;
   --surface-secondary: #1f2937;
   --text-primary: #f8fafc;
-  --text-secondary: #cbd5f5;
+  --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
   --border-primary: #334155;
   --border-secondary: #475569;
@@ -866,7 +866,7 @@ a:hover {
   margin-bottom: var(--space-2xl);
 }
 
-.skill-group h4 {
+.skill-group h3 {
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -925,7 +925,7 @@ a:hover {
   margin-bottom: var(--space-2xl);
 }
 
-.skills-band h4 {
+.skills-band h3 {
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -1249,6 +1249,38 @@ a:hover {
   margin: 0;
   font-size: 0.875rem;
   color: var(--text-muted);
+}
+
+.footer-share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-share-label {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* Touch targets ≥ 48×48px with 8px+ spacing (Lighthouse / accessibility) */
+.footer-share-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 0.8125rem;
+  color: var(--link-color);
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+
+.footer-share-link:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
 }
 
 .footer-theme-label {

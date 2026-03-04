@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  if (typeof emailjs !== "undefined") {
+    emailjs.init("user_cTVaxgVR9KT1uwnqQlw0A");
+  }
+
   var THEME_KEY = "theme";
 
   // Footer year
@@ -52,7 +56,7 @@
           if (entry.isIntersecting) entry.target.classList.add("revealed");
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
     );
     revealEls.forEach(function (el) {
       observer.observe(el);
@@ -82,27 +86,76 @@
     });
   }
 
-  // Active nav link: stays on current section until you scroll into another nav section (no jumping back to Home)
-  var navAnchors = document.querySelectorAll(".nav-links a[href^=\"#\"]");
-  var headerOffset = 100;
+  // Active nav link via Intersection Observer (avoids forced reflow from getBoundingClientRect on scroll)
+  var navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  var headerOffsetPx = 100;
+  var sectionIds = [];
+  var intersecting = Object.create(null);
+  var lastActiveId = sectionIds[0] || "home";
+  navAnchors.forEach(function (a) {
+    var id = (a.getAttribute("href") || "").slice(1);
+    if (id) sectionIds.push(id);
+  });
+  if (sectionIds.length) lastActiveId = sectionIds[0];
 
-  function setActiveNav() {
+  function setActiveFromIntersecting() {
     var bestId = null;
-    navAnchors.forEach(function (a) {
-      var id = a.getAttribute("href").slice(1);
-      var section = id && document.getElementById(id);
-      if (!section) return;
-      var rect = section.getBoundingClientRect();
-      if (rect.top <= headerOffset) bestId = id;
-    });
-    if (!bestId && navAnchors.length) bestId = navAnchors[0].getAttribute("href").slice(1) || "hero";
+    for (var i = sectionIds.length - 1; i >= 0; i--) {
+      if (intersecting[sectionIds[i]]) {
+        bestId = sectionIds[i];
+        break;
+      }
+    }
+    // At top of page: ensure Home (hero) is active
+    if (typeof window !== "undefined" && window.scrollY < headerOffsetPx)
+      bestId = sectionIds[0] || bestId;
+    // When between nav sections (e.g. in highlights/projects), keep last active instead of jumping to Home
+    if (bestId) lastActiveId = bestId;
+    else bestId = lastActiveId;
     navAnchors.forEach(function (a) {
       a.classList.toggle("active", a.getAttribute("href") === "#" + bestId);
     });
   }
 
-  window.addEventListener("scroll", function () { requestAnimationFrame(setActiveNav); }, { passive: true });
-  setActiveNav();
+  var navSections = sectionIds
+    .map(function (id) {
+      return document.getElementById(id);
+    })
+    .filter(Boolean);
+  if (navSections.length) {
+    var navObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          var id = entry.target.id;
+          if (id) intersecting[id] = entry.isIntersecting;
+        });
+        setActiveFromIntersecting();
+      },
+      {
+        root: null,
+        rootMargin: "-" + headerOffsetPx + "px 0px 0px 0px",
+        threshold: 0,
+      },
+    );
+    navSections.forEach(function (el) {
+      navObserver.observe(el);
+    });
+    // Seed initial state once (single layout read on load is acceptable)
+    navSections.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      intersecting[el.id] = rect.top <= headerOffsetPx;
+    });
+    setActiveFromIntersecting();
+
+    // When scrolling back up or after clicking Home, re-run so "at top" check can set Home active (observer may not fire in time)
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (window.scrollY < headerOffsetPx) setActiveFromIntersecting();
+      },
+      { passive: true }
+    );
+  }
 
   // Contact form: try Azure API (MailerSend) first, fall back to EmailJS
   var form = document.getElementById("contact-form");
@@ -138,28 +191,38 @@
         theme_work: "Theme customization",
         integration: "Integration / data sync",
         custom_app: "Custom app / tooling",
-        other: "Other"
+        other: "Other",
       };
       var budgetLabels = {
         under_2k: "Under $2k",
         "2k_5k": "$2k-$5k",
         "5k_10k": "$5k-$10k",
-        "10k_plus": "$10k+"
+        "10k_plus": "$10k+",
       };
 
       if (projectType) {
-        messageText = "[Project type: " + (projectLabels[projectType] || projectType) + "]\n\n" + messageText;
+        messageText =
+          "[Project type: " +
+          (projectLabels[projectType] || projectType) +
+          "]\n\n" +
+          messageText;
       }
       if (budget) {
-        messageText = "[Budget: " + (budgetLabels[budget] || budget) + "]\n\n" + messageText;
+        messageText =
+          "[Budget: " +
+          (budgetLabels[budget] || budget) +
+          "]\n\n" +
+          messageText;
       }
 
       var payload = {
         from_name: form.from_name.value.trim(),
         reply_to: form.reply_to.value.trim(),
         message: messageText,
-        project_type: projectType ? (projectLabels[projectType] || projectType) : "",
-        budget: budget ? (budgetLabels[budget] || budget) : "",
+        project_type: projectType
+          ? projectLabels[projectType] || projectType
+          : "",
+        budget: budget ? budgetLabels[budget] || budget : "",
       };
 
       fetch("/api/sendContact", {
@@ -175,12 +238,17 @@
         .then(function (result) {
           if (result.ok) {
             if (formStatus) {
-              formStatus.textContent = "Message sent. I'll get back to you soon.";
+              formStatus.textContent =
+                "Message sent. I'll get back to you soon.";
               formStatus.className = "form-status success";
             }
             form.reset();
           } else {
-            throw new Error(result.data && result.data.error ? result.data.error : "Send failed");
+            throw new Error(
+              result.data && result.data.error
+                ? result.data.error
+                : "Send failed",
+            );
           }
         })
         .catch(function (err) {
@@ -191,27 +259,31 @@
               reply_to: payload.reply_to,
               message: payload.message,
             };
-            if (payload.project_type) params.project_type = payload.project_type;
+            if (payload.project_type)
+              params.project_type = payload.project_type;
             if (payload.budget) params.budget = payload.budget;
             emailjs
               .send("service_xzps5ii", "template_nii6el7", params)
               .then(function () {
                 if (formStatus) {
-                  formStatus.textContent = "Message sent. I'll get back to you soon.";
+                  formStatus.textContent =
+                    "Message sent. I'll get back to you soon.";
                   formStatus.className = "form-status success";
                 }
                 form.reset();
               })
               .catch(function (emailErr) {
                 if (formStatus) {
-                  formStatus.textContent = "Something went wrong. Please try again or reach out via LinkedIn.";
+                  formStatus.textContent =
+                    "Something went wrong. Please try again or reach out via LinkedIn.";
                   formStatus.className = "form-status error";
                 }
                 console.error("EmailJS error:", emailErr);
               });
           } else {
             if (formStatus) {
-              formStatus.textContent = "Something went wrong. Please try again or reach out via LinkedIn.";
+              formStatus.textContent =
+                "Something went wrong. Please try again or reach out via LinkedIn.";
               formStatus.className = "form-status error";
             }
             console.error("API error:", err);

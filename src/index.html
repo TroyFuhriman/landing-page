@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary meta (SEO) -->
-    <title>
-      Troy Fuhriman — Shopify Expert | Store Builds, Integrations &amp; Apps |
-      Boise
-    </title>
+    <title>Troy Fuhriman | Shopify Expert | Store Builds &amp; Apps | Boise</title>
     <meta
       name="description"
       content="Troy Fuhriman: Shopify expert for store builds, integrations, custom apps &amp; Shopify-adjacent tools. Engineering Manager &amp; Technical Lead. Boise, ID. Get a quote."
@@ -79,12 +76,28 @@
     />
 
     <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+    <!-- Preload LCP image to shorten critical path -->
+    <link
+      rel="preload"
+      as="image"
+      href="https://cellcorestorage.blob.core.windows.net/resource-center/6/63/63b7e3d2-0e39-11eb-8ca4-0050562db46f/1656390491_Troy-square.jpg"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load async to avoid render blocking (swap to all once loaded) -->
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="stylesheet" href="style.css" />
     <script>
       (function () {
@@ -94,16 +107,6 @@
         }
       })();
     </script>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-    ></script>
-    <script type="text/javascript">
-      (function () {
-        emailjs.init("user_cTVaxgVR9KT1uwnqQlw0A");
-      })();
-    </script>
-
     <!-- Structured data (SEO) -->
     <script type="application/ld+json">
       {
@@ -143,7 +146,7 @@
           <span></span><span></span><span></span>
         </button>
         <ul class="nav-links" id="nav-links">
-          <li><a href="#hero">Home</a></li>
+          <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -153,7 +156,7 @@
     </header>
 
     <main id="main">
-      <section class="hero animate-in" id="hero">
+      <section class="hero animate-in" id="home">
         <div class="hero-content">
           <p class="hero-label">
             Everything Shopify — store building, integrations, apps
@@ -300,6 +303,10 @@
       <section class="highlights section section-alt reveal" id="highlights">
         <div class="container">
           <h2 class="section-title">Highlights</h2>
+          <p class="section-subtitle">
+            Representative areas where I deliver: store builds, integrations, and
+            reliable systems.
+          </p>
           <div class="highlights-grid">
             <div class="highlight-card">
               <h3>High-volume Shopify systems</h3>
@@ -367,7 +374,7 @@
                 </li>
               </ul>
               <p class="project-outcome">
-                <strong>Outcome:</strong> Fewer failures under load and clearer
+                <strong>Result:</strong> Fewer failures under load and clearer
                 monitoring for ops.
               </p>
             </article>
@@ -390,7 +397,7 @@
                 <li>Improved stakeholder confidence with clearer visibility</li>
               </ul>
               <p class="project-outcome">
-                <strong>Outcome:</strong> Consistent order/customer state across
+                <strong>Impact:</strong> Consistent order/customer state across
                 systems and faster issue resolution.
               </p>
             </article>
@@ -411,7 +418,7 @@
                 <li>Clear team standards (PR review, releases, conventions)</li>
               </ul>
               <p class="project-outcome">
-                <strong>Outcome:</strong> Scalable, maintainable platform with
+                <strong>Takeaway:</strong> Scalable, maintainable platform with
                 clear team standards.
               </p>
             </article>
@@ -431,7 +438,7 @@
                 <li>Improved “ops + engineering” collaboration</li>
               </ul>
               <p class="project-outcome">
-                <strong>Outcome:</strong> Less manual work and better
+                <strong>Result:</strong> Less manual work and better
                 ops/engineering collaboration.
               </p>
             </article>
@@ -501,7 +508,8 @@
         <div class="container">
           <h2 class="section-title">How we’ll work</h2>
           <p class="section-subtitle">
-            Clear steps, clear communication, and reliable delivery.
+            Clear steps, clear communication, and reliable delivery. We keep
+            scope and timeline realistic from the start.
           </p>
 
           <div class="process-grid">
@@ -600,7 +608,7 @@
           <h2 class="section-title">Skills & technologies</h2>
           <div class="skills-grid">
             <div class="skill-group">
-              <h4>Shopify</h4>
+              <h3>Shopify</h3>
               <ul>
                 <li>Shopify Plus</li>
                 <li>Theme development &amp; customization</li>
@@ -610,7 +618,7 @@
               </ul>
             </div>
             <div class="skill-group">
-              <h4>Frontend &amp; stack</h4>
+              <h3>Frontend &amp; stack</h3>
               <ul>
                 <li>JavaScript</li>
                 <li>React</li>
@@ -620,7 +628,7 @@
               </ul>
             </div>
             <div class="skill-group">
-              <h4>Other</h4>
+              <h3>Other</h3>
               <ul>
                 <li>Product design</li>
                 <li>User experience (UX)</li>
@@ -633,7 +641,7 @@
 
           <!-- NEW: “Architecture” skill band -->
           <div class="skills-band" aria-label="Architecture and platforms">
-            <h4>Architecture &amp; platforms</h4>
+            <h3>Architecture &amp; platforms</h3>
             <ul class="pill-list">
               <li>Azure Functions</li>
               <li>Service Bus / Queues</li>
@@ -645,7 +653,7 @@
           </div>
 
           <div class="certifications">
-            <h4 class="cert-title">Certifications</h4>
+            <h3 class="cert-title">Certifications</h3>
             <ul class="cert-list">
               <li>SQL Practice: Intermediate Queries (LinkedIn)</li>
               <li>Clean Code (Udemy)</li>
@@ -739,7 +747,9 @@
               </p>
             </details>
             <details class="faq-item">
-              <summary>Custom app vs theme + integrations—how do you decide?</summary>
+              <summary>
+                Custom app vs theme + integrations—how do you decide?
+              </summary>
               <p>
                 I recommend the simplest option that meets your goals. Often
                 theme customization plus a few integrations is enough; custom
@@ -877,6 +887,25 @@
         <p class="footer-copy">
           © <span id="year"></span> Troy Fuhriman. All rights reserved.
         </p>
+        <div class="footer-share" role="group" aria-label="Share this page">
+          <span class="footer-share-label">Share:</span>
+          <a
+            href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ftroykfuhriman.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-share-link"
+            aria-label="Share on LinkedIn"
+            >LinkedIn</a
+          >
+          <a
+            href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftroykfuhriman.com&amp;text=Troy%20Fuhriman%20%E2%80%94%20Shopify%20Expert%20%7C%20Store%20Builds%20%26%20Apps%20%7C%20Boise"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-share-link"
+            aria-label="Share on X (Twitter)"
+            >X</a
+          >
+        </div>
         <p class="footer-theme-label">
           You can override the theme (stored in this browser):
         </p>
@@ -909,6 +938,10 @@
       </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+      defer
+    ></script>
+    <script src="app.js" defer></script>
   </body>
 </html>
