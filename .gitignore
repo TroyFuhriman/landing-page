@@ -1,0 +1,6 @@
+# API secrets (MailerSend keys)
+api/local.settings.json
+
+# OS / editor
+.DS_Store
+*.log
