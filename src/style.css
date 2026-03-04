@@ -30,6 +30,7 @@
   --radius: 8px;
   --radius-lg: 12px;
   --transition: 0.2s ease;
+  --header-height: 4rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -114,6 +115,7 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   margin: 0;
+  padding-top: var(--header-height);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -169,30 +171,57 @@ a:hover {
   letter-spacing: -0.02em;
 }
 
-/* ===== Header & Nav ===== */
+/* ===== Header & Nav (fixed so it sticks on desktop and mobile) ===== */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  height: var(--header-height);
   background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-primary);
   overflow-x: hidden;
 }
 
+/* When mobile menu is open, let header grow so dropdown is visible */
+.header:has(.nav.open) {
+  height: auto;
+  min-height: var(--header-height);
+  overflow: visible;
+}
+
+.header:has(.nav.open) .nav {
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: var(--header-height);
+}
+
+/* Keep brand + hamburger row same height when menu is open (no shift) */
+.header:has(.nav.open) .nav .nav-brand,
+.header:has(.nav.open) .nav .nav-toggle {
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+}
+
 .header .nav {
   overflow-x: hidden;
+  height: 100%;
 }
 
 .nav {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--space-md) var(--space-lg);
+  padding: 0 var(--space-lg);
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
+  flex-wrap: nowrap;
 }
 
 .nav-brand {
@@ -201,7 +230,8 @@ a:hover {
   font-size: 1.25rem;
   color: var(--text-primary);
   text-decoration: none;
-  min-width: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-brand:hover {
@@ -229,6 +259,24 @@ a:hover {
 
 .nav-cta {
   flex-shrink: 0;
+}
+.nav-links a.active {
+  color: var(--accent-primary);
+}
+
+.nav-links a.active::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 6px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+}
+
+@media (max-width: 700px) {
+  .nav-links a.active::after {
+    margin-top: 4px;
+  }
 }
 
 .nav-toggle {
@@ -277,7 +325,10 @@ a:hover {
   font-weight: 600;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition);
   text-decoration: none;
   border: 2px solid transparent;
 }
@@ -357,12 +408,30 @@ a:hover {
   flex-wrap: wrap;
   gap: var(--space-md);
 }
+.trust-strip {
+  margin-top: var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.trust-item {
+  font-weight: 500;
+}
+.trust-dot {
+  opacity: 0.6;
+}
 
 .hero-media {
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 0;
+  gap: var(--space-md);
 }
 
 .hero-image-wrap {
@@ -501,7 +570,9 @@ a:hover {
   border: 1px solid var(--border-primary);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
-  transition: border-color var(--transition), box-shadow var(--transition);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
 }
 
 .highlight-card:hover {
@@ -588,6 +659,15 @@ a:hover {
   left: 0;
   color: var(--accent-primary);
 }
+.project-outcome {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
 
 /* ===== Services ===== */
 .services-grid {
@@ -657,6 +737,31 @@ a:hover {
 
 .services-cta p {
   margin: 0 0 var(--space-md);
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-xl);
+}
+
+.process-card {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+
+.process-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  margin: 0 0 var(--space-sm);
+}
+
+.process-card p {
+  margin: 0;
   color: var(--text-muted);
   font-size: 0.9375rem;
 }
@@ -892,6 +997,35 @@ a:hover {
   font-weight: 500;
   color: var(--text-muted);
 }
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.faq-item {
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin: var(--space-sm) 0 0;
+  color: var(--text-muted);
+}
 
 /* ===== Contact ===== */
 .contact-layout {
@@ -925,6 +1059,13 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+}
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .contact-form label {
@@ -1016,7 +1157,9 @@ a:hover {
   .reveal {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.5s ease-out;
   }
 
   .reveal.revealed {
@@ -1036,7 +1179,9 @@ a:hover {
   }
 
   .skill-group li {
-    transition: opacity var(--transition), padding-left var(--transition);
+    transition:
+      opacity var(--transition),
+      padding-left var(--transition);
   }
 
   .skill-group li:hover {
@@ -1045,8 +1190,11 @@ a:hover {
   }
 
   .btn {
-    transition: background-color var(--transition), color var(--transition),
-      border-color var(--transition), transform var(--transition);
+    transition:
+      background-color var(--transition),
+      color var(--transition),
+      border-color var(--transition),
+      transform var(--transition);
   }
 
   .btn:hover {
@@ -1127,7 +1275,9 @@ a:hover {
   border: none;
   border-right: 1px solid var(--border-primary);
   cursor: pointer;
-  transition: background-color var(--transition), color var(--transition);
+  transition:
+    background-color var(--transition),
+    color var(--transition);
 }
 
 .theme-btn:last-child {
@@ -1160,6 +1310,9 @@ a:hover {
 
   .hero-content {
     max-width: none;
+  }
+  .trust-strip {
+    justify-content: center;
   }
 
   .hero-subtitle {
@@ -1221,22 +1374,22 @@ a:hover {
 
   .nav.open .nav-links {
     flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-primary);
-    border-bottom: 1px solid var(--border-primary);
+    width: 100%;
+    order: 3;
+    flex-basis: 100%;
+    margin: 0;
     padding: var(--space-lg);
     gap: var(--space-md);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-primary);
   }
 
   .nav.open .nav-cta {
-    margin-top: var(--space-md);
-  }
-
-  .nav {
-    flex-wrap: wrap;
+    width: 100%;
+    order: 4;
+    flex-basis: 100%;
+    margin: 0 var(--space-lg) var(--space-lg);
+    justify-content: center;
   }
 
   .section {

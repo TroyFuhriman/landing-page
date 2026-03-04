@@ -26,6 +26,15 @@ In the [Azure portal](https://portal.azure.com) → your Static Web App → **Co
 | `MAILERSEND_FROM_EMAIL` | Sender email (e.g. `contact@troykfuhriman.com`) |
 | `MAILERSEND_FROM_NAME` | Sender name (e.g. `Troy Fuhriman`) |
 | `MAILERSEND_TO_EMAIL` | Where to receive messages (e.g. `tkfuhriman@gmail.com`) |
+| `MAILERSEND_TEMPLATE_ID` | _(Optional)_ MailerSend template ID. If set, the API sends using this template and passes personalization variables instead of ad-hoc HTML. |
+
+**When using a template:** the API sends `template_id` and a `personalization` object so your template can use:
+
+- `{{name}}` — sender name  
+- `{{email}}` — sender email (reply-to)  
+- `{{message}}` — message body  
+- `{{project_type}}` — e.g. "Store build / rebuild" or "—" if not set  
+- `{{budget}}` — e.g. "$2k-$5k" or "—" if not set  
 
 Save and restart the app if needed.
 

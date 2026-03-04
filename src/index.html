@@ -145,12 +145,7 @@
         <ul class="nav-links" id="nav-links">
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#highlights">Highlights</a></li>
-          <li><a href="#projects">Case Studies</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         <a class="btn btn-primary nav-cta" href="#contact">Get in touch</a>
@@ -187,6 +182,13 @@
               rel="noopener"
               >Download resume</a
             >
+          </div>
+          <div class="trust-strip" aria-label="Trust signals">
+            <span class="trust-item">Shopify Plus experience</span>
+            <span class="trust-dot" aria-hidden="true">•</span>
+            <span class="trust-item">Integrations: 3PL / CRM / ERP</span>
+            <span class="trust-dot" aria-hidden="true">•</span>
+            <span class="trust-item">Usually responds within 24 hours</span>
           </div>
 
           <!-- NEW: quick “what I do” chips -->
@@ -364,6 +366,10 @@
                   Created a foundation for downstream reporting + automation
                 </li>
               </ul>
+              <p class="project-outcome">
+                <strong>Outcome:</strong> Fewer failures under load and clearer
+                monitoring for ops.
+              </p>
             </article>
 
             <article class="project-card">
@@ -383,6 +389,10 @@
                 </li>
                 <li>Improved stakeholder confidence with clearer visibility</li>
               </ul>
+              <p class="project-outcome">
+                <strong>Outcome:</strong> Consistent order/customer state across
+                systems and faster issue resolution.
+              </p>
             </article>
 
             <article class="project-card">
@@ -400,6 +410,10 @@
                 <li>API integrations designed for long-term maintainability</li>
                 <li>Clear team standards (PR review, releases, conventions)</li>
               </ul>
+              <p class="project-outcome">
+                <strong>Outcome:</strong> Scalable, maintainable platform with
+                clear team standards.
+              </p>
             </article>
 
             <article class="project-card">
@@ -416,6 +430,10 @@
                 <li>Reduced manual workload and turnaround time</li>
                 <li>Improved “ops + engineering” collaboration</li>
               </ul>
+              <p class="project-outcome">
+                <strong>Outcome:</strong> Less manual work and better
+                ops/engineering collaboration.
+              </p>
             </article>
           </div>
         </div>
@@ -475,6 +493,36 @@
             <a class="btn btn-primary" href="#contact"
               >Talk about your project</a
             >
+          </div>
+        </div>
+      </section>
+
+      <section class="process section reveal" id="process">
+        <div class="container">
+          <h2 class="section-title">How we’ll work</h2>
+          <p class="section-subtitle">
+            Clear steps, clear communication, and reliable delivery.
+          </p>
+
+          <div class="process-grid">
+            <div class="process-card">
+              <h3>1) Quick discovery</h3>
+              <p>
+                15-30 minutes to understand goals, constraints, and current
+                stack.
+              </p>
+            </div>
+            <div class="process-card">
+              <h3>2) Plan + estimate</h3>
+              <p>Proposed approach, scope, timeline, and an honest estimate.</p>
+            </div>
+            <div class="process-card">
+              <h3>3) Build + ship</h3>
+              <p>
+                Weekly updates, staged rollouts, and clean
+                handoff/documentation.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -649,6 +697,67 @@
           </div>
         </div>
       </section>
+      <section class="faq section section-alt reveal" id="faq">
+        <div class="container">
+          <h2 class="section-title">FAQ</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Do you work with Shopify Plus?</summary>
+              <p>
+                Yes—store builds, integrations, and custom tooling with Shopify
+                Plus experience.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Can you integrate Shopify with our 3PL/CRM/ERP?</summary>
+              <p>
+                Yes. I typically recommend webhook + queue-based approaches for
+                reliability and scale.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Do you take smaller theme tasks?</summary>
+              <p>
+                Yes—especially if it improves conversion, performance, or
+                long-term maintainability.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>What’s your typical timeline?</summary>
+              <p>
+                It depends on scope. Small theme tweaks can be a few days; store
+                builds or integrations are usually weeks. I’ll give a realistic
+                estimate after a quick discovery call.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Do you do ongoing support or retainer work?</summary>
+              <p>
+                Yes. I can do ongoing maintenance, feature work, or a set number
+                of hours per month—useful after a launch or for long-term
+                integrations.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Custom app vs theme + integrations—how do you decide?</summary>
+              <p>
+                I recommend the simplest option that meets your goals. Often
+                theme customization plus a few integrations is enough; custom
+                apps make sense when you need logic or data that lives outside
+                the storefront.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary>Do you work remotely?</summary>
+              <p>
+                Yes. I’m based in the Boise area and work remotely with clients
+                everywhere. We can use your preferred tools for calls and
+                project management.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
 
       <section class="contact section reveal" id="contact">
         <div class="container">
@@ -699,6 +808,16 @@
             </div>
 
             <form class="contact-form" id="contact-form">
+              <div class="hp-field" aria-hidden="true">
+                <label for="company">Company</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
               <label for="from_name">Name</label>
               <input
                 type="text"
@@ -733,6 +852,14 @@
                 <option value="integration">Integration / data sync</option>
                 <option value="custom_app">Custom app / tooling</option>
                 <option value="other">Other</option>
+              </select>
+              <label for="budget">Budget range (optional)</label>
+              <select id="budget" name="budget">
+                <option value="">Select one</option>
+                <option value="under_2k">Under $2k</option>
+                <option value="2k_5k">$2k-$5k</option>
+                <option value="5k_10k">$5k-$10k</option>
+                <option value="10k_plus">$10k+</option>
               </select>
 
               <button type="submit" class="btn btn-primary">

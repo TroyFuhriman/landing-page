@@ -6,6 +6,7 @@
     "MAILERSEND_API_KEY": "your-mailersend-api-key",
     "MAILERSEND_FROM_EMAIL": "noreply@yourdomain.com",
     "MAILERSEND_FROM_NAME": "Troy Fuhriman",
-    "MAILERSEND_TO_EMAIL": "tkfuhriman@gmail.com"
+    "MAILERSEND_TO_EMAIL": "tkfuhriman@gmail.com",
+    "MAILERSEND_TEMPLATE_ID": ""
   }
 }
