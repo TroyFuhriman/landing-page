@@ -12,17 +12,28 @@ app.http("sendContact", {
     };
 
     if (request.method === "OPTIONS") {
-      return { status: 204, headers: { ...headers, "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" } };
+      return {
+        status: 204,
+        headers: {
+          ...headers,
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
+        },
+      };
     }
 
     const apiKey = process.env.MAILERSEND_API_KEY;
     const fromEmail = process.env.MAILERSEND_FROM_EMAIL;
     const fromName = process.env.MAILERSEND_FROM_NAME || "Troy Fuhriman";
     const toEmail = process.env.MAILERSEND_TO_EMAIL;
-    const templateId = process.env.MAILERSEND_TEMPLATE_ID ? process.env.MAILERSEND_TEMPLATE_ID.trim() : "";
+    const templateId = process.env.MAILERSEND_TEMPLATE_ID
+      ? process.env.MAILERSEND_TEMPLATE_ID.trim()
+      : "";
 
     if (!apiKey || !fromEmail || !toEmail) {
-      context.log.warn("MailerSend config missing: set MAILERSEND_API_KEY, MAILERSEND_FROM_EMAIL, MAILERSEND_TO_EMAIL in Azure app settings.");
+      context.log.warn(
+        "MailerSend config missing: set MAILERSEND_API_KEY, MAILERSEND_FROM_EMAIL, MAILERSEND_TO_EMAIL in Azure app settings.",
+      );
       return {
         status: 503,
         headers,
@@ -60,7 +71,9 @@ app.http("sendContact", {
       return {
         status: 400,
         headers,
-        body: JSON.stringify({ error: "Missing required fields: from_name, reply_to, message." }),
+        body: JSON.stringify({
+          error: "Missing required fields: from_name, reply_to, message.",
+        }),
       };
     }
 
@@ -71,11 +84,12 @@ app.http("sendContact", {
     let mailersendBody;
 
     if (templateId) {
-      // Send using MailerSend template; variables available as {{name}}, {{email}}, {{message}}, {{project_type}}, {{budget}}
       mailersendBody = {
         from: { email: fromEmail, name: fromName },
         to: [{ email: toEmail, name: "Troy Fuhriman" }],
         reply_to: { email: replyTo, name },
+        subject,
+
         template_id: templateId,
         personalization: [
           {
@@ -117,7 +131,9 @@ app.http("sendContact", {
         return {
           status: 502,
           headers,
-          body: JSON.stringify({ error: "Failed to send email. Please try again or email directly." }),
+          body: JSON.stringify({
+            error: "Failed to send email. Please try again or email directly.",
+          }),
         };
       }
 
@@ -131,7 +147,9 @@ app.http("sendContact", {
       return {
         status: 500,
         headers,
-        body: JSON.stringify({ error: "Server error. Please try again later." }),
+        body: JSON.stringify({
+          error: "Server error. Please try again later.",
+        }),
       };
     }
   },
