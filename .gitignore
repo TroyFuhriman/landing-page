@@ -1,6 +1,12 @@
 # API secrets (MailerSend keys)
 api/local.settings.json
 
+# Build output (minified assets)
+dist/
+
+# Dependencies
+node_modules/
+
 # OS / editor
 .DS_Store
 *.log
