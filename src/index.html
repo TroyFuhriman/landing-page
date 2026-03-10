@@ -112,16 +112,18 @@
         }
       })();
     </script>
-    <!-- Structured data (SEO) -->
+    <!-- Structured data (SEO) – Person (knowledge panel, author) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://troykfuhriman.com/#person",
         "name": "Troy Fuhriman",
         "jobTitle": "Engineering Manager / Technical Lead",
         "description": "Shopify expert: store builds, integrations, custom apps and Shopify-adjacent tools. Engineering leader and hands-on developer based in Boise, ID.",
         "url": "https://troykfuhriman.com",
         "image": "https://fuhrimanstorage.blob.core.windows.net/images/Troy-square-optimized-1.jpg",
+        "email": "troy@troykfuhriman.com",
         "sameAs": [
           "https://www.linkedin.com/in/troyfuhriman/",
           "https://github.com/TroyFuhriman"
@@ -138,8 +140,98 @@
         "workLocation": {
           "@type": "Place",
           "name": "Boise Metropolitan Area",
-          "address": { "@type": "PostalAddress", "addressRegion": "ID" }
-        }
+          "address": { "@type": "PostalAddress", "addressRegion": "ID", "addressLocality": "Boise" }
+        },
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "Boise State University" },
+          { "@type": "EducationalOrganization", "name": "CodeWorks" }
+        ]
+      }
+    </script>
+    <!-- WebSite (sitelinks, site search eligibility) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://troykfuhriman.com/#website",
+        "name": "Troy Fuhriman | Shopify Expert",
+        "url": "https://troykfuhriman.com",
+        "description": "Troy Fuhriman: Shopify expert for store builds, integrations, custom apps and Shopify-adjacent tools. Engineering Manager and Technical Lead. Boise, ID.",
+        "inLanguage": "en-US",
+        "publisher": { "@id": "https://troykfuhriman.com/#person" }
+      }
+    </script>
+    <!-- ProfessionalService (local / service rich results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "@id": "https://troykfuhriman.com/#service",
+        "name": "Troy Fuhriman — Shopify Expert & Engineering Lead",
+        "description": "Shopify store builds, integrations, custom apps, and app-adjacent tools. Engineering leader and hands-on developer. Based in Boise, ID.",
+        "url": "https://troykfuhriman.com",
+        "image": "https://fuhrimanstorage.blob.core.windows.net/images/Troy-square-optimized-1.jpg",
+        "areaServed": { "@type": "State", "name": "Idaho", "addressRegion": "ID" },
+        "serviceType": ["Shopify development", "E-commerce integrations", "Custom Shopify apps", "Theme development"],
+        "provider": { "@id": "https://troykfuhriman.com/#person" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Boise", "addressRegion": "ID" }
+      }
+    </script>
+    <!-- FAQPage (FAQ rich results in search) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do you work with Shopify Plus?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes—store builds, integrations, and custom tooling with Shopify Plus experience." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you integrate Shopify with our 3PL/CRM/ERP?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. I typically recommend webhook + queue-based approaches for reliability and scale." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you take smaller theme tasks?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes—especially if it improves conversion, performance, or long-term maintainability." }
+          },
+          {
+            "@type": "Question",
+            "name": "What's your typical timeline?",
+            "acceptedAnswer": { "@type": "Answer", "text": "It depends on scope. Small theme tweaks can be a few days; store builds or integrations are usually weeks. I'll give a realistic estimate after a quick discovery call." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you do ongoing support or retainer work?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. I can do ongoing maintenance, feature work, or a set number of hours per month—useful after a launch or for long-term integrations." }
+          },
+          {
+            "@type": "Question",
+            "name": "Custom app vs theme + integrations—how do you decide?",
+            "acceptedAnswer": { "@type": "Answer", "text": "I recommend the simplest option that meets your goals. Often theme customization plus a few integrations is enough; custom apps make sense when you need logic or data that lives outside the storefront." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work remotely?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. I'm based in the Boise area and work remotely with clients everywhere. We can use your preferred tools for calls and project management." }
+          }
+        ]
+      }
+    </script>
+    <!-- BreadcrumbList (breadcrumb rich results) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://troykfuhriman.com" },
+          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://troykfuhriman.com/#about" },
+          { "@type": "ListItem", "position": 3, "name": "Services", "item": "https://troykfuhriman.com/#services" },
+          { "@type": "ListItem", "position": 4, "name": "Contact", "item": "https://troykfuhriman.com/#contact" }
+        ]
       }
     </script>
   </head>
